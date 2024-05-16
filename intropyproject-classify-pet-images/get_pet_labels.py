@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/get_pet_labels.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                  
+# PROGRAMMER: Motaz Atallah
+# DATE CREATED: 5/15/2024                                 
 # REVISED DATE: 
 # PURPOSE: Create the function get_pet_labels that creates the pet labels from 
 #          the image's filename. This function inputs: 
@@ -40,28 +40,46 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
+    # Creates empty dictionary named results_dic
     results_dic = dict()
+    
+    # Retrieve the filenames from folder
     filename_list = listdir(image_dir)
     
-    for idx in range(0, len(filename_list), 1):
-      pet_image = filename_list[idx]
+    # Adds new key-value pairs to dictionary ONLY when key doesn't already exist. This dictionary's value is
+    # a List that contains only one item - the pet image label
+    for pet_image in filename_list:
       pet_name = get_pet_name(pet_image)
-      if filename_list[idx] not in results_dic:
+      if pet_image not in results_dic:
         results_dic[pet_image] = [pet_name]
       else:
-        print("** Warning: Key=", pet_image,
-               "already exists in results_dic with value =",
-               results_dic[pet_image])
+        print(f"** Warning: Key={pet_image} already exists in results_dic with value = {results_dic[pet_image]}")
 
     return results_dic
 
 def get_pet_name(pet_image):
+  """
+  Extracts and formats the pet name from the given filename.
+    
+  Parameters:
+    pet_image - The filename of the pet image (string)
+    
+  Returns:
+    pet_name - The formatted pet name (string)
+  """
+  # Convert filename to lower case
   low_pet_image = pet_image.lower()
+  
+  # Split the filename by underscores
   word_list_pet_image = low_pet_image.split("_")
+  
+  # Initialize an empty string to hold the pet name
   pet_name = ""
   
+  # Concatenate alphabetic words to form the pet name
   for word in word_list_pet_image:
     if word.isalpha():
       pet_name += word + " "
 
+  # Strip leading and trailing whitespace characters
   return pet_name.strip()
