@@ -67,7 +67,71 @@ def calculates_results_stats(results_dic):
                      and the value is the statistic's value. See comments above
                      and the classroom Item XX Calculating Results for details
                      on how to calculate the counts and statistics.
-    """        
-    # Replace None with the results_stats_dic dictionary that you created with 
-    # this function 
-    return None
+    """
+    # Check if results_dic is empty
+    if not results_dic:
+        return {}
+
+    # Initialize results_stats_dic with counters to zero and number of images total
+    results_stats_dic = {
+        'n_images': len(results_dic),
+        'n_correct_dogs': 0,
+        'n_dogs_img': 0,
+        'n_correct_notdogs': 0,
+        'n_notdogs_img': 0,
+        'n_correct_breed': 0,
+        'n_match': 0
+    }
+
+    # Calculate counts
+    calculate_counts(results_dic, results_stats_dic)
+
+    # Calculate percentages based on counts
+    calculate_percentages(results_stats_dic)
+
+    return results_stats_dic
+
+def calculate_counts(results_dic, results_stats_dic):
+    """
+    Calculate various counts based on the results dictionary.
+
+    Parameters:
+      results_dic - A dictionary with image filenames as keys and result lists as values (dict)
+      results_stats_dic - A dictionary containing results_stats_dic of various counts with 0 (dict)
+    Returns:
+      None - results_stats_dic is mutable data type so no return needed.   
+    """
+    
+    # Interates through the results_dic to compute the statistics and update counts
+    # outside of the calculates_results_stats() function
+    for value in results_dic.values():
+        label_matches, pet_is_dog, classifier_is_dog = value[2:]
+
+        if pet_is_dog:
+            results_stats_dic['n_dogs_img'] += 1
+            if classifier_is_dog:
+                    results_stats_dic['n_correct_dogs'] += 1
+            if label_matches:
+                    results_stats_dic['n_correct_breed'] += 1
+        else:
+            results_stats_dic['n_notdogs_img'] += 1
+            if not classifier_is_dog:
+                    results_stats_dic['n_correct_notdogs'] += 1
+        
+        if label_matches:
+            results_stats_dic['n_match'] += 1
+
+def calculate_percentages(results_stats_dic):
+    """
+    Calculate various percentages based on the results_stats_dic.
+
+    Parameters:
+       results_stats_dic - A dictionary containing results_stats_dic of various counts (dict)
+
+    Returns:
+       None - results_stats_dic is mutable data type so no return needed.   
+    """
+    results_stats_dic['pct_correct_dogs'] = (results_stats_dic['n_correct_dogs'] / results_stats_dic['n_dogs_img']) * 100.0 if results_stats_dic['n_dogs_img'] > 0 else 0
+    results_stats_dic['pct_correct_notdogs'] = (results_stats_dic['n_correct_notdogs'] / results_stats_dic['n_notdogs_img']) * 100.0 if results_stats_dic['n_notdogs_img'] > 0 else 0
+    results_stats_dic['pct_correct_breed'] = (results_stats_dic['n_correct_breed'] / results_stats_dic['n_dogs_img']) * 100.0 if results_stats_dic['n_dogs_img'] > 0 else 0
+    results_stats_dic['pct_match'] = (results_stats_dic['n_match'] / results_stats_dic['n_images']) * 100.0
