@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/check_images.py
 #
-# TODO 0: Add your information below for Programmer & Date Created.                                                                             
 # PROGRAMMER: Motaz Atallah
 # DATE CREATED: 5/15/2024
 # REVISED DATE: 
@@ -99,19 +98,16 @@ def main():
     check_calculating_results(results, results_stats)
 
 
-    # TODO 6: Define print_results function within the file print_results.py
     # Once the print_results function has been defined replace 'None' 
     # in the function call with in_arg.arch  Once you have done the 
     # replacements your function call should look like this: 
     #      print_results(results, results_stats, in_arg.arch, True, True)
     # Prints summary results, incorrect classifications of dogs (if requested)
     # and incorrectly classified breeds (if requested)
-    print_results(results, results_stats, None, True, True)
+    print_results(results, results_stats, in_arg.arch, True, True)
     
-    # TODO 0: Measure total program runtime by collecting end time
     end_time = time()
     
-    # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
     tot_time = end_time - start_time
     print("\n** Total Elapsed Runtime:",
           str(round((tot_time/3600)))+":"+str(round((tot_time%3600)/60))+":"
