@@ -1,8 +1,9 @@
 from enum import Enum
 
+
 class StatFields(Enum):
     """
-    Enum for representing various statistics fields that's need for the classification.
+    Enum for representing various statistics fields that's a need for the classification.
 
     Attributes:
     ----------
@@ -29,7 +30,7 @@ class StatFields(Enum):
     PCT_CORRECT_NOTDOGS : str
         Represents the percentage of correctly classified NON-dogs.
     """
-    
+
     N_IMAGES = "n_images"
     N_DOGS_IMG = "n_dogs_img"
     N_NOTDOGS_IMG = "n_notdogs_img"
