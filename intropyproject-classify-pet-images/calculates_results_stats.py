@@ -38,10 +38,13 @@
 #            pct_correct_notdogs - percentage of correctly classified NON-dogs
 #
 ##
-# TODO 5: Define calculates_results_stats function below, please be certain to replace None
 #       in the return statement with the results_stats_dic dictionary that you create 
 #       with this function
 # 
+
+# Imports statistic fields enum
+from statistic_fields import StatFields
+
 def calculates_results_stats(results_dic):
     """
     Calculates statistics of the results of the program run using classifier's model 
@@ -132,13 +135,13 @@ def calculate_counts(results_dic, results_stats_dic):
 
     # Update the dictionary with calculated counts
     results_stats_dic.update({
-        'n_images': len(results_dic),
-        'n_correct_dogs': n_correct_dogs,
-        'n_dogs_img': n_dogs_img,
-        'n_correct_notdogs': n_correct_notdogs,
-        'n_notdogs_img': n_notdogs_img,
-        'n_correct_breed': n_correct_breed,
-        'n_match': n_match
+        StatFields.N_IMAGES.value: len(results_dic),
+        StatFields.N_CORRECT_DOGS.value: n_correct_dogs,
+        StatFields.N_DOGS_IMG.value: n_dogs_img,
+        StatFields.N_CORRECT_NOTDOGS.value: n_correct_notdogs,
+        StatFields.N_NOTDOGS_IMG.value: n_notdogs_img,
+        StatFields.N_CORRECT_BREED.value: n_correct_breed,
+        StatFields.N_MATCH.value: n_match
     })
     
 def calculate_percentages(results_stats_dic):
@@ -153,21 +156,21 @@ def calculate_percentages(results_stats_dic):
     """
     
     # Calculate percentage of correctly classified dogs
-    pct_correct_dogs = ( results_stats_dic['n_correct_dogs'] / results_stats_dic['n_dogs_img'] )* 100.0 if results_stats_dic['n_dogs_img'] > 0 else 0
+    pct_correct_dogs = ( results_stats_dic[StatFields.N_CORRECT_DOGS.value] / results_stats_dic[StatFields.N_DOGS_IMG.value] )*100.0
     
     # Calculate percentage of correctly classified non-dogs
-    pct_correct_notdogs = ( results_stats_dic['n_correct_notdogs'] / results_stats_dic['n_notdogs_img'] )* 100.0 if results_stats_dic['n_notdogs_img'] > 0 else 0
+    pct_correct_notdogs = ( results_stats_dic[StatFields.N_CORRECT_NOTDOGS.value] / results_stats_dic[StatFields.N_NOTDOGS_IMG.value] )*100.0 if results_stats_dic[StatFields.N_NOTDOGS_IMG.value] > 0 else 0.0
     
     # Calculate percentage of correctly classified dog breeds
-    pct_correct_breed = ( results_stats_dic['n_correct_breed'] / results_stats_dic['n_dogs_img'] )* 100.0 if results_stats_dic['n_dogs_img'] > 0 else 0
+    pct_correct_breed = ( results_stats_dic[StatFields.N_CORRECT_BREED.value] / results_stats_dic[StatFields.N_DOGS_IMG.value] )*100.0
     
     # Calculate percentage of correct matches
-    pct_match = ( results_stats_dic['n_match'] / results_stats_dic['n_images'] )* 100.0
+    pct_match = ( results_stats_dic[StatFields.N_MATCH.value] / results_stats_dic[StatFields.N_IMAGES.value] )*100
     
     # Update the dictionary with calculated percentages
     results_stats_dic.update({
-        'pct_correct_dogs': pct_correct_dogs,
-        'pct_correct_notdogs': pct_correct_notdogs,
-        'pct_correct_breed': pct_correct_breed,
-        'pct_match': pct_match
+        StatFields.PCT_CORRECT_DOGS.value: round(pct_correct_dogs, 1),
+        StatFields.PCT_CORRECT_NOTDOGS.value: round(pct_correct_notdogs, 1),
+        StatFields.PCT_CORRECT_BREED.value: round(pct_correct_breed, 1),
+        StatFields.PCT_MATCH.value: round(pct_match, 1)
     })

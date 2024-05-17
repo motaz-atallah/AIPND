@@ -19,7 +19,6 @@
 # Imports python modules
 from os import listdir
 
-# TODO 2: Define get_pet_labels function below please be certain to replace None
 #       in the return statement with results_dic dictionary that you create 
 #       with this function
 # 
@@ -46,15 +45,25 @@ def get_pet_labels(image_dir):
     # Retrieve the filenames from folder
     filename_list = listdir(image_dir)
     
-    # Adds new key-value pairs to dictionary ONLY when key doesn't already exist. This dictionary's value is
-    # a List that contains only one item - the pet image label
+    # Processes through each file in the directory, extracting only the words
+    # of the file that contain the pet image label
     for pet_image in filename_list:
-      pet_name = get_pet_name(pet_image)
-      if pet_image not in results_dic:
-        results_dic[pet_image] = [pet_name]
-      else:
-        print(f"** Warning: Key={pet_image} already exists in results_dic with value = {results_dic[pet_image]}")
+      
+      # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
+      # isn't an pet image file
+      if pet_image[0] != ".":
+        
+        # Get pet image label
+        pet_name = get_pet_name(pet_image)
+        
+        # If pet image doesn't exist in dictionary add it
+        # otherwise print an error message to indicates for a duplicate
+        if pet_image not in results_dic:
+          results_dic[pet_image] = [pet_name]
+        else:
+          print(f"** Warning: Key={pet_image} already exists in results_dic with value = {results_dic[pet_image]}")
 
+    # Return the expected results as dic
     return results_dic
 
 def get_pet_name(pet_image):

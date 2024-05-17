@@ -30,6 +30,10 @@
 #       Notice that this function doesn't to return anything because it  
 #       prints a summary of the results using results_dic and results_stats_dic
 # 
+
+# Imports statistic fields enum
+from statistic_fields import StatFields
+
 def print_results(results_dic, results_stats_dic, model, 
                   print_incorrect_dogs = False, print_incorrect_breed = False):
     """
@@ -68,11 +72,11 @@ def print_results(results_dic, results_stats_dic, model,
     print_percentages(results_stats_dic)
     
     # Print misclassified dogs if requested
-    if print_incorrect_dogs and results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'] != results_stats_dic['n_images']:
+    if print_incorrect_dogs and results_stats_dic[StatFields.N_CORRECT_DOGS.value] + results_stats_dic[StatFields.N_CORRECT_NOTDOGS.value] != results_stats_dic[StatFields.N_IMAGES.value]:
         print_misclassified_items(results_dic, misclassified_dogs_condition, "\n** Misclassified Dogs: ")
     
     # Print misclassified breeds if requested
-    if print_incorrect_breed and results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']:
+    if print_incorrect_breed and results_stats_dic[StatFields.N_CORRECT_DOGS.value] != results_stats_dic[StatFields.N_CORRECT_BREED.value]:
         print_misclassified_items(results_dic, misclassified_breeds_condition, "\n** Misclassified Breed's of Dog: ")
     
 def print_summary(results_stats_dic, model):
@@ -89,9 +93,9 @@ def print_summary(results_stats_dic, model):
     """
 
     print(f"\n** Using the {model.title()} CNN Model Architecture: ")
-    print(f"Number of Images: {results_stats_dic['n_images']}")
-    print(f"Number of Dog Images: {results_stats_dic['n_dogs_img']}")
-    print(f"Number of 'Not-a' Dog Images: {results_stats_dic['n_notdogs_img']}")
+    print(f"Number of Images: {results_stats_dic[StatFields.N_IMAGES.value]}")
+    print(f"Number of Dog Images: {results_stats_dic[StatFields.N_DOGS_IMG.value]}")
+    print(f"Number of 'Not-a' Dog Images: {results_stats_dic[StatFields.N_NOTDOGS_IMG.value]}")
     
     
 def print_percentages(results_stats_dic):
@@ -106,10 +110,10 @@ def print_percentages(results_stats_dic):
     """
     # Create a mapping dictionary for the desired output names
     mapping = {
-            'pct_correct_dogs': "Correct Dogs",
-            'pct_correct_breed': "Correct Breed",
-            'pct_correct_notdogs': "Correct \"Not-a\" Dog",
-            'pct_match': "Match"
+            StatFields.PCT_CORRECT_DOGS.value: "Correct Dogs",
+            StatFields.PCT_CORRECT_BREED.value: "Correct Breed",
+            StatFields.PCT_CORRECT_NOTDOGS.value: "Correct \"Not-a\" Dog",
+            StatFields.PCT_MATCH.value: "Match"
             }
     
     print("\n** Percentage Calculations: ")

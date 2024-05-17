@@ -31,7 +31,6 @@
 #           label isn't a dog.
 #
 ##
-# TODO 4: Define adjust_results4_isadog function below, specifically replace the None
 #       below by the function definition of the adjust_results4_isadog function. 
 #       Notice that this function doesn't return anything because the 
 #       results_dic dictionary that is passed into the function is a mutable 
@@ -70,23 +69,39 @@ def adjust_results4_isadog(results_dic, dogfile):
     # Creates empty dictionary named dognames_dic to store dog names from the dog file
     dognames_dic = dict()
     
-    # Read dog names from the dog file and populate the dictionary
+    # Read dog names from the dog file and populate the dictionary &
+    # automatically closes file
     with open(dogfile, 'r') as file:
+      
+      # Processes each line in file until reaching EOF (end-of-file) by 
+      # processing line and adding dognames to dognames_dic with while loop
       for dog_name_line in file:
+        
+        # Process line by striping newline from line
         dog_name = dog_name_line.rstrip()
+        
+        # Adds dogname(line) to dogsnames_dic if it doesn't already exist, otherwise print warning
         if dog_name not in dognames_dic:
           dognames_dic[dog_name] = 1
         else:
           print(f"** Warning: {dog_name} dog name already exists in dognames_dic with value = {dognames_dic[dog_name]}")
     
-    # Iterate through each entry in the results dictionary to extend the dog classification 
-    # update indices 3 and 4
+    # Iterate through each entry value in the results dictionary to extend the dog classification 
+    # Add to whether pet labels & classifier labels are dogs by appending
+    # two items to end of value(List) in results_dic. 
+    # List Index 3 = whether(1) or not(0) Pet Image Label is a dog AND 
+    # List Index 4 = whether(1) or not(0) Classifier Label is a dog
     for value in results_dic.values():
+      
+      # Extract labels values from the results dic and assign the variables
       pet_image_label, classifier_labels = value[0], value[1]
-      # Check if pet label is a dog
+      
+      # Check if pet label is a dog then 1, otherwise 0
       match_pet_image_label = 1 if pet_image_label in dognames_dic else 0
-      # Check if classifier label is a dog
+      
+      # Check if classifier label is a dog then 1, otherwise 0
       match_classifier_labels = 1 if classifier_labels in dognames_dic else 0
+      
       # Add new indices to the value list indicating dog classification
       value.extend([match_pet_image_label, match_classifier_labels])
       
