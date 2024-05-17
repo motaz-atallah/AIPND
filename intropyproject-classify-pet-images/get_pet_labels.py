@@ -19,7 +19,8 @@
 # Imports python modules
 from os import listdir
 
-#       in the return statement with results_dic dictionary that you create 
+
+#       in the return statement with results_dic dictionary that you create
 #       with this function
 # 
 def get_pet_labels(image_dir):
@@ -41,54 +42,56 @@ def get_pet_labels(image_dir):
     """
     # Creates empty dictionary named results_dic
     results_dic = dict()
-    
+
     # Retrieve the filenames from folder
     filename_list = listdir(image_dir)
-    
+
     # Processes through each file in the directory, extracting only the words
     # of the file that contain the pet image label
     for pet_image in filename_list:
-      
-      # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
-      # isn't an pet image file
-      if pet_image[0] != ".":
-        
-        # Get pet image label
-        pet_name = get_pet_name(pet_image)
-        
-        # If pet image doesn't exist in dictionary add it
-        # otherwise print an error message to indicates for a duplicate
-        if pet_image not in results_dic:
-          results_dic[pet_image] = [pet_name]
-        else:
-          print(f"** Warning: Key={pet_image} already exists in results_dic with value = {results_dic[pet_image]}")
+
+        # Skips file if starts with . (like .DS_Store of Mac OSX) because it
+        # isn't an pet image file
+        if pet_image[0] != ".":
+
+            # Get pet image label
+            pet_name = get_pet_name(pet_image)
+
+            # If pet image doesn't exist in dictionary add it
+            # otherwise print an error message to indicates for a duplicate
+            if pet_image not in results_dic:
+                results_dic[pet_image] = [pet_name]
+            else:
+                print(
+                    f"** Warning: Key={pet_image} already exists in results_dic with value = {results_dic[pet_image]}")
 
     # Return the expected results as dic
     return results_dic
 
-def get_pet_name(pet_image):
-  """
-  Extracts and formats the pet name from the given filename.
-    
-  Parameters:
-    pet_image - The filename of the pet image (string)
-    
-  Returns:
-    pet_name - The formatted pet name (string)
-  """
-  # Convert filename to lower case
-  low_pet_image = pet_image.lower()
-  
-  # Split the filename by underscores
-  word_list_pet_image = low_pet_image.split("_")
-  
-  # Initialize an empty string to hold the pet name
-  pet_name = ""
-  
-  # Concatenate alphabetic words to form the pet name
-  for word in word_list_pet_image:
-    if word.isalpha():
-      pet_name += word + " "
 
-  # Strip leading and trailing whitespace characters
-  return pet_name.strip()
+def get_pet_name(pet_image):
+    """
+    Extracts and formats the pet name from the given filename.
+    
+    Parameters:
+        pet_image - The filename of the pet image (string)
+    
+    Returns:
+        pet_name - The formatted pet name (string)
+    """
+    # Convert filename to lower case
+    low_pet_image = pet_image.lower()
+
+    # Split the filename by underscores
+    word_list_pet_image = low_pet_image.split("_")
+
+    # Initialize an empty string to hold the pet name
+    pet_name = ""
+
+    # Concatenate alphabetic words to form the pet name
+    for word in word_list_pet_image:
+        if word.isalpha():
+            pet_name += word + " "
+
+    # Strip leading and trailing whitespace characters
+    return pet_name.strip()

@@ -36,10 +36,11 @@ from adjust_results4_isadog import adjust_results4_isadog
 from calculates_results_stats import calculates_results_stats
 from print_results import print_results
 
+
 # Main program function defined below
 def main():
     start_time = time()
-    # This function retrieves 3 Command Line Arugments from user as input from
+    # This function retrieves 3 Command Line Arguments from user as input from
     # the user running the program from a terminal window. This function returns
     # the collection of these command line arguments from the function call as
     # the variable in_arg
@@ -48,8 +49,7 @@ def main():
     # Function that checks command line arguments using in_arg  
     check_command_line_arguments(in_arg)
 
-    
-    # Once the get_pet_labels function has been defined replace 'None' 
+    # Once the get_pet_labels function has been defined replace 'None'
     # in the function call with in_arg.dir  Once you have done the replacements
     # your function call should look like this: 
     #             get_pet_labels(in_arg.dir)
@@ -60,8 +60,7 @@ def main():
     # Function that checks Pet Images in the results Dictionary using results    
     check_creating_pet_image_labels(results)
 
-
-    # Once the classify_images function has been defined replace first 'None' 
+    # Once the classify_images function has been defined replace first 'None'
     # in the function call with in_arg.dir and replace the last 'None' in the
     # function call with in_arg.arch  Once you have done the replacements your
     # function call should look like this: 
@@ -71,8 +70,7 @@ def main():
     classify_images(in_arg.dir, results, in_arg.arch)
 
     # Function that checks Results Dictionary using results    
-    check_classifying_images(results)    
-
+    check_classifying_images(results)
 
     # Once the adjust_results4_isadog function has been defined replace 'None' 
     # in the function call with in_arg.dogfile  Once you have done the 
@@ -86,7 +84,6 @@ def main():
     # Function that checks Results Dictionary for is-a-dog adjustment using results
     check_classifying_labels_as_dogs(results)
 
-
     # This function creates the results statistics dictionary that contains a
     # summary of the results statistics (this includes counts & percentages). This
     # dictionary is returned from the function call as the variable results_stats    
@@ -97,22 +94,21 @@ def main():
     # Function that checks Results Statistics Dictionary using results_stats
     check_calculating_results(results, results_stats)
 
-
-    # Once the print_results function has been defined replace 'None' 
+    # Once the print_results function has been defined replace 'None'
     # in the function call with in_arg.arch  Once you have done the 
     # replacements your function call should look like this: 
     #      print_results(results, results_stats, in_arg.arch, True, True)
     # Prints summary results, incorrect classifications of dogs (if requested)
     # and incorrectly classified breeds (if requested)
     print_results(results, results_stats, in_arg.arch, True, True)
-    
+
     end_time = time()
-    
+
     tot_time = end_time - start_time
     print("\n** Total Elapsed Runtime:",
-          str(round((tot_time/3600)))+":"+str(round((tot_time%3600)/60))+":"
-          +str(round((tot_time%3600)%60)) )
-    
+          str(round((tot_time / 3600))) + ":" + str(round((tot_time % 3600) / 60)) + ":"
+          + str(round((tot_time % 3600) % 60)))
+
 
 # Call to main function to run the program
 if __name__ == "__main__":
