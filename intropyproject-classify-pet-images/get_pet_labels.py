@@ -79,19 +79,11 @@ def get_pet_name(pet_image):
     Returns:
         pet_name - The formatted pet name (string)
     """
-    # Convert filename to lower case
-    low_pet_image = pet_image.lower()
-
-    # Split the filename by underscores
-    word_list_pet_image = low_pet_image.split("_")
-
-    # Initialize an empty string to hold the pet name
-    pet_name = ""
+    # Convert filename to lower case and Split the filename by underscores
+    list_pet_image = pet_image.lower().split("_")
 
     # Concatenate alphabetic words to form the pet name
-    for word in word_list_pet_image:
-        if word.isalpha():
-            pet_name += word + " "
+    pet_name = ' '.join([word for word in list_pet_image if word.isalpha()])
 
     # Strip leading and trailing whitespace characters
     return pet_name.strip()

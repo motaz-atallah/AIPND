@@ -20,9 +20,11 @@
 #           of the pet and classifier labels as the item at index 2 of the list.
 #
 ##
+from os import path
 # Imports classifier function for using CNN to classify images 
 from classifier import classifier
 
+## Impor
 
 #       below by the function definition of the classify_images function. 
 #       Notice that this function doesn't return anything because the 
@@ -70,7 +72,7 @@ def classify_images(images_dir, results_dic, model):
     # with the classifier function to get the classifier label.
     for key, value in results_dic.items():
         # Construct the full path to the image file
-        test_image = f'{images_dir}/{key}'
+        test_image = path.join(images_dir, key)
 
         # Get the pet image label from the results dictionary
         pet_image_label = value[0]
